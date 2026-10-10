@@ -10,6 +10,7 @@ jobs:
       - run: unzip -o lostcraft_ps2.zip
       - run: |
           cd lostcraft_ps2
+          printf 'EE_INCS += -I/usr/local/ps2dev/gsKit/include\nEE_LDFLAGS += -L/usr/local/ps2dev/gsKit/lib\n' | cat - Makefile > M && mv M Makefile
           make
           mkdir -p iso && cp lostcraft.elf iso/LOSTCRAFT.ELF
           printf 'BOOT2 = cdrom0:\\LOSTCRAFT.ELF;1\r\nVER = 1.00\r\nVMODE = NTSC\r\n' > iso/SYSTEM.CNF
